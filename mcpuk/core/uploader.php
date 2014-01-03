@@ -329,7 +329,12 @@ class uploader {
 	}
 
 	protected function normalizeFilename($filename) {
-
+	//setlocale(LC_ALL, 'de_DE'); // doesn't help as expected for correct german umlauts transliteration ä -> ae
+	$filename = urlencode($filename);
+	$filename = iconv('UTF-8', 'ASCII//TRANSLIT//IGNORE', $filename);
+	$filename = strtolower($filename);
+	$filename = preg_replace('/[=+%#<>"~`@\?\[\]\{\}\|\^\'\\\\]/', '', $filename); // remove chars that are illegal/unsafe in a url
+	
 		if ($transaliasSettings = $this->getTransaliasSettings()) {
 			if (!class_exists('TransAlias')) {
 				include MODX_BASE_PATH . 'assets/plugins/transalias/transalias.class.php';

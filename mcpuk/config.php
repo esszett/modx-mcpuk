@@ -17,7 +17,10 @@
 // See http://kcfinder.sunhater.com/install for setting descriptions
 
 if (file_exists(MODX_BASE_PATH . 'assets/plugins/transalias/transliterations/common.php')) {
-	$commonTransliterations = array_merge(include(MODX_BASE_PATH . 'assets/plugins/transalias/transliterations/common.php'), array(' ' => '-', ':' => '.'));
+	$commonTransliterations = array_merge(include(MODX_BASE_PATH . 'assets/plugins/transalias/transliterations/common.php'), array(
+		'&' => '-und-',
+		'+' => '-und-',
+		' ' => '-', ':' => '.'));
 } else {
 	$commonTransliterations = array(
 		'&' => 'and', '%' => '', '\'' => '',
